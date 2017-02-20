@@ -1,14 +1,35 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="dark">
     <ion-title>
-      Ionic Blank
+      Astronomia imagens do dia (APOD)
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content class="card-background-page">
+
+  <ion-item color="dark">
+    <ion-label>Escolha o dia:</ion-label>
+    <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="YYYY-MM-DD" [(ngModel)]="date" (ngModelChange)="loadData(date)"></ion-datetime>
+  </ion-item>
+
+  <ion-card *ngIf="apod_data">
+    <img [src]="apod_data.url" *ngIf=" apod_data.media_type == 'image' "/>
+
+    <iframe width="100%" height="400" [src]="sanetizeUrl(apod_data.url)" frameborder="0" allowfullscreen *ngIf=" apod_data.media_type == 'video' "></iframe>
+
+    <div class="card-title">{{ apod_data.title }}</div>
+    <div class="card-subtitle">{{ apod_data.copyright }}</div>
+  </ion-card>
+
+  <ion-card *ngIf="apod_data">
+    <ion-card-content text-left>
+      {{ apod_data.explanation }}
+
+      <hr>
+
+      {{ apod_data.date | date:'dd/MM/yyyy' }}
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
