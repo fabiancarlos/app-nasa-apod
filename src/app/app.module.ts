@@ -3,6 +3,8 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
+import { ApodService } from '../services/apod.service';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -16,6 +18,6 @@ import { HomePage } from '../pages/home/home';
     MyApp,
     HomePage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [ApodService, {provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
 export class AppModule {}
